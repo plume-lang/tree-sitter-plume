@@ -11,7 +11,7 @@ function parens(rule) {
 }
 
 module.exports = grammar({
-  name: "plume_language",
+  name: "plume",
 
   extras: ($) => [/[\s\n\t]/, $.comment],
 

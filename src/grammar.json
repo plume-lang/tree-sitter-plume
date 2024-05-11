@@ -1,5 +1,5 @@
 {
-  "name": "plume_language",
+  "name": "plume",
   "rules": {
     "program": {
       "type": "REPEAT1",
