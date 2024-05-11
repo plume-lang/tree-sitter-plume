@@ -1,3 +1,3 @@
-# tree-sitter-quick_check
+# tree-sitter-plume
 
 A grammar to test your Tree-sitter development workflow

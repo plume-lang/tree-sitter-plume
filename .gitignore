@@ -1,3 +1,5 @@
 node_modules
 build
 *.log
+
+tree-sitter-plume_language
