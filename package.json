@@ -1,0 +1,16 @@
+{
+  "name": "tree-sitter-plume",
+  "version": "0.0.1",
+  "description": "Plume grammar for tree-sitter",
+  "main": "bindings/node",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plume-lang/tree-sitter-plume"
+  },
+  "author": "Sisypheus",
+  "license": "MIT",
+  "scripts": {
+    "build": "tree-sitter generate",
+    "playground": "npm run build && tree-sitter build-wasm && tree-sitter playground"
+  }
+}
