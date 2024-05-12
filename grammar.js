@@ -22,19 +22,22 @@ module.exports = grammar({
 
     expr: ($) =>
       choice(
+        $.comment,
         $.function_definition,
+        $.keyword,
         $.annotation,
         $.function_call,
         $.generics,
         $.list_expr,
         $.arguments,
-        $.keyword,
         $.literal,
-        $.identifier,
+        $.variable,
         $.reserved_operator,
         $.custom_operator,
         $.block,
       ),
+
+    variable: ($) => $.identifier,
 
     annotation: ($) => seq($.colon, $.type), // Types are annotations
 
@@ -53,13 +56,14 @@ module.exports = grammar({
         seq(
           "fn",
           field("fn_name", $.identifier),
-          field("fn_generics", optional($.generics)),
-          field("fn_arguments", parens(commaSep($.function_argument))),
-          field("fn_return_type", optional(seq(":", $.type))),
-          field("fn_body", $.body),
+          optional($.generics),
+          parens(commaSep($.function_argument)),
+          optional($.annotation),
+          $.body,
         ),
       ),
-    function_argument: ($) => seq($.identifier, optional(seq(":", $.type))),
+    function_argument: ($) =>
+      seq(field("arg_name", $.identifier), optional($.annotation)),
     body: ($) => choice(seq("=>", $.expr), $.block),
 
     operator: () =>
@@ -151,7 +155,10 @@ module.exports = grammar({
     type_function: ($) =>
       prec(1, seq("fn", seq("(", commaSep($.type), ")"), ":", $.type)),
     type_compound: ($) =>
-      prec(1, seq($.identifier, "<", commaSep($.type), ">")),
+      prec(
+        1,
+        seq(field("type_name", $.identifier), "<", commaSep($.type), ">"),
+      ),
 
     keyword: () =>
       choice(
