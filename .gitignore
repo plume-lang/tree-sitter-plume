@@ -2,4 +2,4 @@ node_modules
 build
 *.log
 
-tree-sitter-plume_language.wasm
+tree-sitter-plume.wasm
