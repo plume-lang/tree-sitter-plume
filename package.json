@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Plume grammar for tree-sitter",
   "main": "bindings/node",
+  "types": "bindings/node",
   "repository": {
     "type": "git",
     "url": "https://github.com/plume-lang/tree-sitter-plume"
@@ -11,6 +12,36 @@
   "license": "MIT",
   "scripts": {
     "build": "tree-sitter generate",
-    "playground": "npm run build && tree-sitter build-wasm && tree-sitter playground"
-  }
+    "playground": "npm run build && tree-sitter build-wasm && tree-sitter playground",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
+  },
+  "dependencies": {
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "prebuildify": "^6.0.0"
+  },
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
+  "tree-sitter": [
+    {
+      "scope": "source.plume",
+      "injection-regex": "^plume$"
+    }
+  ]
 }
